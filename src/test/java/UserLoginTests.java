@@ -12,7 +12,7 @@ public class UserLoginTests extends BaseUserTest {
     @DisplayName("login existing user")
     public void loginExistingUser() {
         Response registerUserResponse = registerUser(registerUserRequest);
-        accessToken = registerUserResponse.getBody().as(RegisterUserResponse.class).getAccessToken();
+        setAccessToken(registerUserResponse.getBody().as(RegisterUserResponse.class).getAccessToken());
 
         Response loginUserResponse = loginUser(new LoginUserRequest(registerUserRequest.getEmail(), registerUserRequest.getPassword()));
         loginUserResponse.then().statusCode(200)
@@ -23,7 +23,7 @@ public class UserLoginTests extends BaseUserTest {
     @DisplayName("login with wrong credentials")
     public void loginWithWrongCreds() {
         Response registerUserResponse = registerUser(registerUserRequest);
-        accessToken = registerUserResponse.getBody().as(RegisterUserResponse.class).getAccessToken();
+        setAccessToken(registerUserResponse.getBody().as(RegisterUserResponse.class).getAccessToken());
 
         Response loginUserResponse = loginUser(new LoginUserRequest("blbla@mail.ru", "000"));
         loginUserResponse.then().statusCode(401)

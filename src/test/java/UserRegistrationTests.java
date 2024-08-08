@@ -11,7 +11,7 @@ public class UserRegistrationTests extends BaseUserTest {
     @DisplayName("register unique user")
     public void registerUniqueUser() {
         Response registerUserResponse = registerUser(registerUserRequest);
-        accessToken = registerUserResponse.getBody().as(RegisterUserResponse.class).getAccessToken();
+        setAccessToken(registerUserResponse.getBody().as(RegisterUserResponse.class).getAccessToken());
         registerUserResponse.then().statusCode(200)
                 .and().assertThat().body("success", equalTo(true));
     }
@@ -20,7 +20,7 @@ public class UserRegistrationTests extends BaseUserTest {
     @DisplayName("register already registered user")
     public void registerAlreadyRegisteredUser() {
         Response registerUserResponse = registerUser(registerUserRequest);
-        accessToken = registerUserResponse.getBody().as(RegisterUserResponse.class).getAccessToken();
+        setAccessToken(registerUserResponse.getBody().as(RegisterUserResponse.class).getAccessToken());
         Response registerUserBadResponse = registerUser(registerUserRequest);
 
         registerUserBadResponse.then().statusCode(403)

@@ -3,6 +3,7 @@ package api.client;
 import io.restassured.response.Response;
 import model.LoginUserRequest;
 import model.RegisterUserRequest;
+import model.UpdateUserRequest;
 
 import static io.restassured.RestAssured.given;
 
@@ -31,5 +32,22 @@ public class UserClient {
                 .auth().oauth2(accessToken)
                 .when()
                 .delete("/api/auth/user");
+    }
+
+    public Response getUser(String accessToken) {
+        return given()
+                .auth().oauth2(accessToken)
+                .when()
+                .get("/api/auth/user");
+    }
+
+    public Response updateUser(UpdateUserRequest request, String accessToken) {
+        return given()
+                .header("Content-type", "application/json")
+                .auth().oauth2(accessToken)
+                .and()
+                .body(request)
+                .when()
+                .patch("/api/auth/user");
     }
 }

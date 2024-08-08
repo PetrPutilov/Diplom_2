@@ -3,6 +3,7 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import model.LoginUserRequest;
 import model.RegisterUserRequest;
+import model.UpdateUserRequest;
 import org.junit.After;
 import org.junit.Before;
 
@@ -10,7 +11,7 @@ public class BaseUserTest extends BaseTest {
 
     private final UserClient userClient = new UserClient();
 
-    protected String accessToken;
+    private String accessToken;
 
     protected RegisterUserRequest registerUserRequest;
 
@@ -34,11 +35,36 @@ public class BaseUserTest extends BaseTest {
         return userClient.loginUser(request);
     }
 
+    @Step("update user")
+    public Response updateUser(UpdateUserRequest request, String accessToken) {
+        return userClient.updateUser(request, accessToken);
+    }
+
+    @Step("get user")
+    public Response getUser(String accessToken) {
+        return userClient.getUser(accessToken);
+    }
+
     @Step("delete user")
     public Response deleteUser(String accessToken) {
         if (accessToken == null) return null;
-        String pureToken = accessToken.substring(7);
-        return userClient.deleteUser(pureToken);
+        return userClient.deleteUser(accessToken);
+    }
+
+    protected void setAccessToken(String accessToken){
+        if (accessToken == null) {
+            this.accessToken = null;
+            return;
+        }
+        if (accessToken.contains("Bearer ")){
+            this.accessToken = accessToken.substring(7);
+        } else {
+            this.accessToken = accessToken;
+        }
+    }
+
+    protected String getAccessToken() {
+        return accessToken;
     }
 
 }
