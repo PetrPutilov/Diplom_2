@@ -31,4 +31,17 @@ public class UserOrderClient {
                 .when()
                 .get("/api/ingredients");
     }
+
+    public Response getUserOrders() {
+        return given()
+                .when()
+                .get("/api/orders");
+    }
+
+    public Response getUserOrders(String accessToken) {
+        return given()
+                .auth().oauth2(accessToken)
+                .when()
+                .get("/api/orders");
+    }
 }

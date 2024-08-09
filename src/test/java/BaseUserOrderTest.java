@@ -20,4 +20,14 @@ public class BaseUserOrderTest extends BaseUserTest {
     public Response getIngredients() {
         return userOrderClient.getIngredients();
     }
+
+    @Step("get user orders wit no authorization")
+    public Response getUserOrders() {
+        return userOrderClient.getUserOrders();
+    }
+
+    @Step("get user orders wit authorization")
+    public Response getUserOrders(String accessToken) {
+        return userOrderClient.getUserOrders(accessToken);
+    }
 }
