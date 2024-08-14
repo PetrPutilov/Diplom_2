@@ -1,3 +1,4 @@
+import com.github.javafaker.Faker;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import model.LoginUserRequest;
@@ -12,11 +13,12 @@ public class UserUpdateTests extends BaseUserTest {
     @Test
     @DisplayName("update user with authorization")
     public void updateUser() {
-        String newUserName = "Hans Gruber";
+        Faker faker = new Faker();
+        String newUserName = faker.name().fullName();
         Response registerUserResponse = registerUser(registerUserRequest);
         setAccessToken(registerUserResponse.getBody().as(RegisterUserResponse.class).getAccessToken());
 
-        Response userInfoResponse = updateUser(new UpdateUserRequest("blabla@mail.ru", registerUserRequest.getPassword(), newUserName), getAccessToken());
+        Response userInfoResponse = updateUser(new UpdateUserRequest(faker.internet().emailAddress(), registerUserRequest.getPassword(), newUserName), getAccessToken());
         userInfoResponse.then().statusCode(200)
                 .and().assertThat().body("success", equalTo(true));
 

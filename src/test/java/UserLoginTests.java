@@ -1,3 +1,4 @@
+import com.github.javafaker.Faker;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import model.LoginUserRequest;
@@ -22,10 +23,11 @@ public class UserLoginTests extends BaseUserTest {
     @Test
     @DisplayName("login with wrong credentials")
     public void loginWithWrongCreds() {
+        Faker faker = new Faker();
         Response registerUserResponse = registerUser(registerUserRequest);
         setAccessToken(registerUserResponse.getBody().as(RegisterUserResponse.class).getAccessToken());
 
-        Response loginUserResponse = loginUser(new LoginUserRequest("blbla@mail.ru", "000"));
+        Response loginUserResponse = loginUser(new LoginUserRequest(faker.internet().emailAddress(), faker.internet().password()));
         loginUserResponse.then().statusCode(401)
                 .and().assertThat().body("success", equalTo(false));
     }

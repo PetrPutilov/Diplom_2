@@ -1,3 +1,4 @@
+import com.github.javafaker.Faker;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import model.*;
@@ -79,8 +80,9 @@ public class MakeOrderTests extends BaseUserOrderTest {
     @Test
     @DisplayName("make order with wrong ingredients")
     public void orderWithWrongIngredients() {
+        Faker faker = new Faker();
 
-        MakeOrderRequest makeOrderRequest = new MakeOrderRequest(List.of("blablabla"));
+        MakeOrderRequest makeOrderRequest = new MakeOrderRequest(List.of(faker.idNumber().invalid()));
 
         Response makeOrderResponse = makeOrder(makeOrderRequest);
 
