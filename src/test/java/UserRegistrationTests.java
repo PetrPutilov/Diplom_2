@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 
-public class UserRegistrationTests extends BaseUserTest {
+public class UserRegistrationTests extends BaseUserSteps {
 
     @Test
     @DisplayName("register unique user")

@@ -7,7 +7,7 @@ import model.UpdateUserRequest;
 import org.junit.After;
 import org.junit.Before;
 
-public class BaseUserTest extends BaseTest {
+public class BaseUserSteps extends BaseTest {
 
     private final UserClient userClient = new UserClient();
 

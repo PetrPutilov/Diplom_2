@@ -1,14 +1,13 @@
 import com.github.javafaker.Faker;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
-import model.LoginUserRequest;
 import model.RegisterUserResponse;
 import model.UpdateUserRequest;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 
-public class UserUpdateTests extends BaseUserTest {
+public class UserUpdateTests extends BaseUserSteps {
 
     @Test
     @DisplayName("update user with authorization")

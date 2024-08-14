@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 
-public class GetOrderTests extends BaseUserOrderTest {
+public class GetOrderTests extends BaseUserOrderSteps {
 
     @Test
     @DisplayName("get order for authorized user")

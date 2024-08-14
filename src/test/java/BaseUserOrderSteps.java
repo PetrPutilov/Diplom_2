@@ -3,7 +3,7 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import model.MakeOrderRequest;
 
-public class BaseUserOrderTest extends BaseUserTest {
+public class BaseUserOrderSteps extends BaseUserSteps {
     private final UserOrderClient userOrderClient = new UserOrderClient();
 
     @Step("make order with no authorization")

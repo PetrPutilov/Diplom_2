@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.equalTo;
 
-public class MakeOrderTests extends BaseUserOrderTest {
+public class MakeOrderTests extends BaseUserOrderSteps {
 
     @Test
     @DisplayName("make order with authorization")

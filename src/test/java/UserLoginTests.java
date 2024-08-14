@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static org.hamcrest.Matchers.equalTo;
 
-public class UserLoginTests extends BaseUserTest {
+public class UserLoginTests extends BaseUserSteps {
 
     @Test
     @DisplayName("login existing user")
